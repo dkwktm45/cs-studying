@@ -17,55 +17,36 @@ public class BaekJoon4949 {
       }else{
         sb.append(solve(problem)).append("\n");
       }
-
-/*       stack.clear();
-      for (char s : problem.trim().toCharArray()) {
-        if (s == '(') {
-          stack.add(s);
-        } else if (s == ')') {
-          if (stack.peek() != '(' && stack.isEmpty()){
-            break;
-          }else{
-            stack.pop();
-          }
-        } else if (s == ']') {
-          if (stack.peek() != '[' && stack.isEmpty()){
-            break;
-          }else{
-            stack.pop();
-          }
-        } else if (s == '[') {
-          stack.add(s);
-        }
-      }
-      sb.append(stack.isEmpty() ? "yes" : "no").append("\n"); */
     }
     System.out.println(sb);
   }
   
-  private static String solve(String s) {
+  private static String solve(String problem) {
     Stack<Character> stack = new Stack<>();
-    for (int i = 0; i < s.length(); i++) {
-      char c = s.charAt(i);
-      if (c == '(' || c == '[')
-        stack.push(c);
+    
+    for (char s : problem.toCharArray()) {
+      if (s == '(' || s == '[') {
+        stack.add(s);
+      } else if (s == ')') {
+        if (stack.peek() != '(' && stack.isEmpty()) {
+          return "no";
+        } else {
+          stack.pop();
+        }
+      } else if (s == ']') {
+        if (stack.peek() != '[' && stack.isEmpty()) {
+          return "no";
+        } else {
+          stack.pop();
+        }
+      } 
 
-      else if (c == ')') {
-        if (stack.isEmpty() || stack.peek() != '(')
-          return "no";
-        else
-          stack.pop();
-      } else if (c == ']') {
-        if (stack.isEmpty() || stack.peek() != '[')
-          return "no";
-        else
-          stack.pop();
-      }
     }
-
-    if (stack.isEmpty())
+    
+    if (stack.isEmpty()) {
       return "yes";
-    else
+    } else {
       return "no";
+    }
   }
 }
