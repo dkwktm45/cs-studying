@@ -5,7 +5,9 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public class Sort10814 {
-    /* 나이 순으로 정렬을 하되 나이가 같다면 그 이후에는 이름으로 정렬하는 알고리즘 */
+    /* 나이 순으로 정렬을 하되 나이가 같다면 그 이후에는 이름으로 정렬하는 알고리즘 
+     * 추가적인 공부 blog --> https://velog.io/@dkwktm45/Java-%EC%A0%95%EB%A0%AC-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-Comparator%EC%97%90-%EB%8C%80%ED%95%B4
+    */
     public static void main(String[] args) throws NumberFormatException, IOException  {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -25,7 +27,6 @@ public class Sort10814 {
 			public int compare(String[] s1, String[] s2) {
 				return Integer.parseInt(s1[0]) - Integer.parseInt(s2[0]);
 			}
-			
 		});
 		
 		for(int i = 0; i < length; i++) {
