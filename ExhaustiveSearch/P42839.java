@@ -5,8 +5,9 @@ public class P42839 {
     static char[] arr; // 종이조각
     static boolean[] visited; // 사용여부
         
-    public int solution(String numbers) {
+    public static void main(String[] args) {
         int answer = 0;
+        String numbers = "17";
         arr = new char[numbers.length()];
         visited = new boolean[numbers.length()];
         
@@ -17,11 +18,11 @@ public class P42839 {
         recursion("",0); // 재귀함수
         
         answer = set.size();
-        return answer;
+        System.out.println(answer);
     }
     
     // dfs 재귀로 구현. 가능한 숫자 조합 찾고 소수면 set에 추가
-    public void recursion(String str, int idx){
+    public static  void recursion(String str, int idx){
         //System.out.println("재귀 str:"+str+", idx: "+idx);
         int num;
         if(str!=""){
@@ -41,7 +42,7 @@ public class P42839 {
     }//recursion
     
     // 소수 판별
-    public boolean isPrime(int num){
+    public static  boolean isPrime(int num){
         if(num==0||num==1) return false;
         for(int i=2; i*i<=num;i++){
             if(num%i==0) return false;
