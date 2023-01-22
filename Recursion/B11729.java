@@ -22,7 +22,7 @@ public class B11729 {
         if (N == 1) {
             sb.append(start + " " + to + "\n");
             return;
-        } 
+        }
      
         // A -> C로 옮긴다고 가정할 떄,
         // STEP 1 : N-1개를 A에서 B로 이동 (= start 지점의 N-1개의 원판을 mid 지점으로 옮긴다.)
