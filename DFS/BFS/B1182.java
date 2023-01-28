@@ -19,26 +19,16 @@ public class B1182 {
         }
 
         solution(0, 0);
+        if (n == 0) cnt--; 
         System.out.println(cnt);
     }
 
-    public static void solution(int nx, int x){
-        if(answer == n && x != 0){
-            cnt++;
-            return;
+    public static void solution(int nx, int x){ // nx 더할지 말지 결정할 수의 순번, x 현재 수열의 총합
+        if (nx == arr.length) { //모든 원소에 대해 합할지 안할지 선택한 한 가지의 경우의 수를 구할 때 당연히 cur횟수가 원소의 수와 같아진다.
+            if (x == n) cnt++; 
+            return; 
         }
-
-        for(int i = 0; i<arr.length;i++){
-            if (visited[i] || x>i) continue;		// 이미 합을 구했던 부분수열은 고려하지 않음
-
-            visited[i] = true;
-            answer += arr[i];
-            solution(nx + 1,i);
-    
-            visited[i] = false;
-            answer -= arr[i];
-            
-        }
-
+        solution(nx + 1, x); //현재 원소를 합하지 않는 경우
+	    solution(nx + 1, x + arr[nx]); //현재 원소를 합하는 경우
     }
 }
