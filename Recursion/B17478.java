@@ -15,10 +15,6 @@ public class B17478 {
     recur(0,"");
   }
   public static void recur(int depth, String under) {
-    //        String under = "";
-    //        for (int i = 1; i <= depth; i++) {
-    //            under += "____";
-    //        }
     
             if (depth == n) {
                 System.out.println(under + "\"재귀함수가 뭔가요?\"");
