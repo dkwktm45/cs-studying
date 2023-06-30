@@ -1,4 +1,4 @@
-package Trie;
+package tree;
 
 
 import java.io.BufferedReader;
