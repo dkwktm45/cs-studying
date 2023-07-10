@@ -15,7 +15,6 @@ public class Boj2579 {
       stairs[i] = sc.nextInt();
     }
 
-
     System.out.println(dp(dp, stairs, n));
   }
 
