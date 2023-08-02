@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Boj16918 {
-  // BOJ / 16918번 / 봄버맨 / 구현, 시뮬레이션 , 그래프 / 실버1
   static boom map[][];
   static int dr[] = {1,-1,0,0};
   static int dc[] = {0,0,1,-1};
