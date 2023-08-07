@@ -5,17 +5,21 @@ import java.util.Queue;
 
 public class Pro159993 {
   public static void main(String[] args) {
-    String[] maps = {"SOOOL", "OOOOX", "OOOOE", "OOOOO", "OOOOO"};
+    String[] maps = {"SLXOX", "EXXXO", "OOOOO", "OXXXX", "OOOOO"};
     System.out.println(solution(maps));
   }
 
-  private static int[][] direction = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+  private static final int[][] direction = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
   private static Node[][] arr;
   private static boolean[][] visited;
+
   private static int solution(String[] maps) {
     int[] start = new int[2];
     arr = new Node[maps.length][maps[0].length()];
     visited = new boolean[maps.length][maps[0].length()];
+
+    int[] lev = new int[2];
+
     for (int i = 0; i < maps.length; i++) {
       char[] chars = maps[i].toCharArray();
       for (int j = 0; j < chars.length; j++) {
@@ -23,33 +27,39 @@ public class Pro159993 {
           start[0] = i;
           start[1] = j;
         }
+
+        if (chars[j] == 'L') {
+          lev[0] = i;
+          lev[1] = j;
+        }
         arr[i][j] = new Node(chars[j], 0);
       }
     }
+    int levCount = bfs(start, 'L');
 
-    Queue<int[]> q = new LinkedList<>();
-    // 결국에는 두번으로 나눠서 풀어야 하는 문제!!
-    return bfs(start, q);
+    if (levCount == -1) return -1;
+
+    visited = new boolean[arr.length][arr[0].length];
+    visited[lev[0]][lev[1]] = true;
+    int endCount = bfs(lev , 'E');
+
+    if (endCount == -1) return -1;
+
+    return levCount + endCount;
   }
 
-  private static int bfs(int[] start , Queue<int[]> q) {
+  private static int bfs(int[] start, char find) {
     visited[start[0]][start[1]] = true;
+    Queue<int[]> q = new LinkedList<>();
     q.add(start);
-    boolean flag = false;
 
-    int min = Integer.MAX_VALUE;
     while (!q.isEmpty()) {
       int[] currNode = q.poll();
 
-      if (flag && arr[currNode[0]][currNode[1]].c == 'E'){
-        min = Math.min(arr[currNode[0]][currNode[1]].move, min);
-        break;
-      }
-
-      if (!flag && arr[currNode[0]][currNode[1]].c == 'L') {
-        flag = true;
-        visited = new boolean[arr.length][arr[0].length];
-        visited[currNode[0]][currNode[1]] = true;
+      if (arr[currNode[0]][currNode[1]].c == find) {
+        int result = arr[currNode[0]][currNode[1]].move;
+        arr[currNode[0]][currNode[1]].move = 0;
+        return result;
       }
 
 
@@ -62,23 +72,24 @@ public class Pro159993 {
         if (!visited[x][y] && arr[x][y].c != 'X') {
           visited[x][y] = true;
           arr[x][y].move = arr[currNode[0]][currNode[1]].move + 1;
-          q.add(new int[]{x,y});
+          q.add(new int[]{x, y});
         }
       }
     }
 
-    return min == Integer.MAX_VALUE ? -1 : min;
+    return -1;
   }
 
   private static boolean lengthCheck(int x, int y) {
-    return x >= 0 && y >=0 && x < arr.length && y < arr[0].length;
+    return x >= 0 && y >= 0 && x < arr.length && y < arr[0].length;
   }
 
   private static class Node {
-    public Node(char c , int move) {
+    public Node(char c, int move) {
       this.c = c;
       this.move = move;
     }
+
     char c;
     int move;
   }
