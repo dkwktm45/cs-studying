@@ -23,21 +23,25 @@ public class Pro155651 {
 
     Arrays.sort(timeArr, (x,y) -> x.time - y.time);
     LinkedList<Stack<Node>> list = new LinkedList<>();
+
+    // 첫번째 방 대실 시작
     Stack<Node> stack = new Stack<>();
     stack.add(timeArr[0]);
     list.add(stack);
+
     for (int i = 1; i < timeArr.length; i++) {
       boolean flag = true;
       for (int j = 0; j < list.size(); j++) {
+        // 기존에 방을 쓰던 사람이 대실이 끝난경우
         if (list.get(j).peek().periodTime <= timeArr[i].time) {
-          stack = list.remove(j);
-          stack.add(timeArr[i]);
-          list.add(j,stack);
+          // 방 시간 교체!!
+          list.get(j).add(timeArr[i]);
           flag = false;
           break;
         }
       }
 
+      // 새로운 방 생성
       if (flag) {
         stack = new Stack<>();
         stack.add(timeArr[i]);

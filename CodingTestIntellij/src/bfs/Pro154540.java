@@ -3,7 +3,10 @@ package bfs;
 import java.util.*;
 
 public class Pro154540 {
-
+  /**
+   * 처음에는 BFS으로 풀기는 풀되 접근을 어떻게 할지 몰랐음
+   * 땅을 찾는 다면 그 땅에 해당하는 다음 땅을 어떻게 한번의 BFS로 할꼬~~~
+   * */
   public static void main(String[] args) {
     String[] maps = {"X591X", "X1X5X", "X231X", "1XXX1"};
     System.out.println(Arrays.toString(solution(maps)));
@@ -38,7 +41,6 @@ public class Pro154540 {
 
     Collections.sort(list);
     if (list.size() == 0) return new int[]{-1};
-
 
     int[] answer = new int[list.size()];
     for (int i = 0; i < list.size(); i++) {

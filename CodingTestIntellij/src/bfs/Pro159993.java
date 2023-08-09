@@ -4,6 +4,19 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class Pro159993 {
+
+  /**
+   * 단순 BFS를 통해서 문제를 해결할 수 있는 문제인지 알았다.
+   * 처음에는 start 위치만 찾았고 그 다음 스위치만 찾고 다시 bfs를 통해서 해결 가능할 줄 알음!!
+   * 하지만 아래 예시 같은 경우는 조금 달라진다!!
+   * "SOOOL"
+   * "OOOOO"
+   * "OOOOO"
+   * "EOOOO"
+   * "OOOOO"
+   * 같은 경우 달라진다!! L의 위치를 찾아 줬다면 이미 Q에는 E에 근접해 있을 것이다. 그렇다면 값이 오답을 찾게된다!!
+   * 그렇기에 결국 L 스위치를 찾고 L에 위치부터 다시 E의 스위치를 찾아줘야 하는 문제!!
+   * */
   public static void main(String[] args) {
     String[] maps = {"SLXOX", "EXXXO", "OOOOO", "OXXXX", "OOOOO"};
     System.out.println(solution(maps));
