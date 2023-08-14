@@ -5,8 +5,6 @@ import java.util.*;
 public class Pro155651 {
 
   public static int solution(String[][] book_time) {
-    int answer = 0;
-
     Node[] timeArr = new Node[book_time.length];
     for (int i = 0; i < book_time.length; i++) {
       String[] A = book_time[i][0].split(":");
@@ -18,7 +16,7 @@ public class Pro155651 {
       int period = Integer.parseInt(B[0]) * 60;
       period += Integer.parseInt(B[1]);
 
-      timeArr[i] = new Node(time, period+ 10);
+      timeArr[i] = new Node(time, period + 10);
     }
 
     Arrays.sort(timeArr, (x,y) -> x.time - y.time);
@@ -31,6 +29,7 @@ public class Pro155651 {
 
     for (int i = 1; i < timeArr.length; i++) {
       boolean flag = true;
+
       for (int j = 0; j < list.size(); j++) {
         // 기존에 방을 쓰던 사람이 대실이 끝난경우
         if (list.get(j).peek().periodTime <= timeArr[i].time) {

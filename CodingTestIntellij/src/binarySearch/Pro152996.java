@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Pro152996 {
-  //
-  //
   /**
    * 비율을 계산하기 위한 비례식 필요
    * x:y = a:b
@@ -15,7 +13,6 @@ public class Pro152996 {
    * 상한 값 : 대상 값보다 큰 값 중 가장 작은 값
    *
    * 결국에는 비율이 필요로 한 문제
-   *
    * 비율을 통해서 값을 찾아가는 방식!!
    */
   private static final int[][] rates = {{1, 1}, {3, 2}, {4, 2}, {4, 3}};

@@ -13,13 +13,11 @@ public class Pro154540 {
   }
   static List<Integer> list = new ArrayList<>();
   static boolean[][] visited;
-  static boolean[][] dfsViited;
   static int[][] direction = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
   static int number = 0;
   public static int[] solution(String[] maps){
     char[][] chars = new char[maps.length][maps[0].length()];
     visited = new boolean[maps.length][maps[0].length()];
-    dfsViited = new boolean[chars.length][chars[0].length];
 
     for (int i = 0; i < maps.length; i++) {
       char[] temp = maps[i].toCharArray();
