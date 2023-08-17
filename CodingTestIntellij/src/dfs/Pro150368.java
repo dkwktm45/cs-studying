@@ -9,17 +9,21 @@ public class Pro150368 {
   static int[] index;
   public static int[] solution(int[][] users, int[] emoticons) {
     answer = new int[2];
-    int dc = 40;
+    int discountInfo = 40;
     int length = emoticons.length;
     discounts = new int[4][length];
     visited = new boolean[length];
     index = new int[length + 1];
-    for(int i = 0; i < 4; i++, dc -= 10)
-      for(int j = 0; j < length; j++)
-        discounts[i][j] = dc;
 
-    for(int i = 0; i < index.length; i++)
+    for(int i = 0; i < 4; i++, discountInfo -= 10){
+      for(int j = 0; j < length; j++){
+        discounts[i][j] = discountInfo;
+      }
+    }
+
+    for(int i = 0; i < index.length; i++){
       index[i] = 0;
+    }
 
 
     dfs(users,emoticons, 0, emoticons.length);
@@ -36,7 +40,7 @@ public class Pro150368 {
         sum = 0;
         for (int j = 0; j < N; j++) {
           //System.out.println(emoticons[j] + "의 "+discounts[index[j]][j]+"%할인 후 가격 = " + price);
-          if (users[i][0] <= discounts[index[j]][j]) { //생각했던 할인율 보다 높으면 일단 삼
+          if (users[i][0] <= discounts[index[j]  ][j]) { //생각했던 할인율 보다 높으면 일단 삼
             int price = emoticons[j] - emoticons[j] * discounts[index[j]][j] / 100;
             sum += price;
           }

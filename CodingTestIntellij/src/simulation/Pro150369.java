@@ -1,47 +1,69 @@
 package simulation;
 
 import java.util.Arrays;
+import java.util.Stack;
 
 public class Pro150369 {
-  // todo 다시 한번 풀어보기!!
+  /**
+   * 처음에 예시의 함정에 빠져나오지 못함
+   * */
   public static void main(String[] args) {
     int cap = 2;
     int n = 7;
-    int[] deliveries = {1, 0, 2, 0, 1, 0, 2};
-    int[] pickups = {0, 2, 0, 1, 0, 2, 0};
+    int[] deliveries = {1, 0, 2, 0, 1, 0, 0};
+    int[] pickups = {0, 2, 0, 1, 0, 2, 2};
     System.out.println(solution(cap, n , deliveries, pickups));
   }
   public static int solution(int cap, int n, int[] deliveries, int[] pickups) {
-    int[][] diff = new int[n][3];
-    for (int i = 0; i < n; i++) {
-      diff[i][0] = deliveries[i] - pickups[i];  // 차이 (배달 - 수거)
-      diff[i][1] = deliveries[i];  // 배달
-      diff[i][2] = pickups[i];     // 수거
+    Stack<Integer> deliveriesStack = new Stack<>();
+    Stack<Integer> pickupsStack = new Stack<>();
+    long answer = 0;
+
+    for(int i=0; i<n; i++){
+      deliveriesStack.push(deliveries[i]);
+      pickupsStack.push(pickups[i]);
     }
-    Arrays.sort(diff, (a, b) -> Integer.compare(b[0], a[0]));  // 내림차순 정렬
 
-    int totalDistance = 0;  // 이동 거리의 누적 합
-    int truckLoad = 0;      // 트럭에 현재 실려있는 택배 상자 수
+    //둘 중 하나라도 참이면 계속 굴러간다.
+    while(!deliveriesStack.isEmpty() || !pickupsStack.isEmpty()){
 
-    for (int i = 0; i < n; i++) {
-      totalDistance += Math.abs(diff[i][0]) * 2;  // 현재 집까지의 이동 거리 추가
-
-      // 배달 가능한 만큼 택배를 싣고 처리
-      if (truckLoad + diff[i][1] <= cap) {
-        truckLoad += diff[i][1];
-      } else {
-        // 트럭에 남은 용량보다 배달량이 많으면 남은 택배만큼만 싣고 나머지는 다음 배송으로 미룸
-        totalDistance += Math.abs(diff[i][1] - (cap - truckLoad)) * 2;
-        truckLoad = cap;
+      //맨 끝이 0일 경우 계산할 필요 없으니 pop
+      while(!deliveriesStack.isEmpty() && deliveriesStack.peek() == 0){
+        deliveriesStack.pop();
+      }
+      while(!pickupsStack.isEmpty() && pickupsStack.peek() == 0){
+        pickupsStack.pop();
       }
 
-      // 수거 처리
-      truckLoad -= diff[i][2];
+      answer += 2*Math.max(deliveriesStack.size(), pickupsStack.size());
+
+      int Dtarget = 0;
+      while(!deliveriesStack.isEmpty()){
+        int Dcurrent = deliveriesStack.pop();
+
+        if(Dtarget + Dcurrent <= cap){
+          //배달 가능
+          Dtarget += Dcurrent;
+        }else{
+          //배달 불가능
+          deliveriesStack.push(Dtarget + Dcurrent - cap);
+          break;
+        }
+      }
+
+      int Ptarget = 0;
+      while(!pickupsStack.isEmpty()) {
+        int Pcurrent = pickupsStack.pop();
+
+        if(Ptarget + Pcurrent <= cap){
+          Ptarget += Pcurrent;
+        }else{
+          pickupsStack.push(Ptarget + Pcurrent - cap);
+          break;
+        }
+      }
     }
 
-    // 물류창고로 돌아가는 이동 거리 추가
-    totalDistance += Math.abs(diff[n - 1][0]);  // 가장 마지막 집에서 물류창고로 돌아가는 이동 거리
-
-    return totalDistance;
+    return (int) answer;
   }
 }
