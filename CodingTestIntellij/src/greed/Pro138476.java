@@ -26,16 +26,14 @@ public class Pro138476 {
     Queue<Integer> q = new LinkedList<>();
     int sum = 0;
     for (int i = 0; i < keySet.size(); i++) {
-      while (sum > k) {
-        sum -= q.poll();
-      }
 
       int val = map.get(keySet.get(i));
       sum += val;
       q.add(val);
-    }
-    while (sum > k) {
-      sum -= q.poll();
+      while (sum > k) {
+        sum -= q.poll();
+        System.out.println(sum);
+      }
     }
 
     if (sum != k) {
