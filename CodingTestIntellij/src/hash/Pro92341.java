@@ -46,6 +46,7 @@ public class Pro92341 {
       }
     }
 
+    // 계산 및 출차를 못한 차는 출차시간 계산
     for (Map.Entry<String, int[]> info : map.entrySet()) {
       if (info.getValue()[2] != -1) {
           info.getValue()[1] += 1439 - info.getValue()[2];
@@ -59,8 +60,8 @@ public class Pro92341 {
       }
     }
 
+    // 정렬
     List<String> list = new ArrayList<>(map.keySet());
-
     Collections.sort(list);
     int[] answer = new int[list.size()];
     for (int i = 0; i < list.size(); i++) {
