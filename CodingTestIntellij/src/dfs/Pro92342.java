@@ -12,7 +12,7 @@ public class Pro92342 {
 
     System.out.println(Arrays.toString(solution(n, info)));
   }
-  static int maxDepth; // 최대 깊이 (n)
+  static int maxDepth; // 화살의 사용량
   static int[] aInfo; // 어피치가 과녁 맞춘 정보
   static int[] maxLInfo; // 점수 차이가 최대일때 라이언 과녁 맞춘 정보 (계속 갱신)
   static int maxScoreDiff = 0; // 최대 점수 차이 (계속 갱신)

@@ -14,15 +14,20 @@ public class Pro87946 {
   static int answer = 0;
   public static int solution(int k, int[][] dungeons) {
 
-    Arrays.sort(dungeons , (x, y) -> y[0] - x[0]);
     boolean[] visited = new boolean[dungeons.length];
     dfs( 0, k, dungeons, visited);
 
     return answer;
   }
+  /**
+   * 던전 입장시 최소 피로도와 던전을 돌고 나서 소모 피로도가 주어지는데
+   * 이를 내가 가진 피로도를 통해서 얼마나 많은 던전을 돌 수 있는가를
+   * 묻는 문제
+   * */
 
   public static void dfs( int count, int k, int[][] dungeons, boolean[] visited) {
     for (int j = 0; j < dungeons.length; j++) {
+      // 입장에 필요한 최소 피로도를 넘고 방문하지 않은 던전
       if (dungeons[j][0] <= k && !visited[j]) {
         visited[j] = true;
         count++;
