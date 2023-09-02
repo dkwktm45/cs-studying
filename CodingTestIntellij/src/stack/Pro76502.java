@@ -11,7 +11,6 @@ public class Pro76502 {
 
   public static int solution(String s) {
     int answer = 0;
-
     for (int i = 0; i < s.length(); i++) {
       String tempS =  s.substring(i) + s.substring(0,i);
 
